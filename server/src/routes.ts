@@ -3,7 +3,7 @@ import {prisma} from './lib/prisma'
 import { FastifyInstance } from 'fastify'
 import {z} from 'zod'
 import dayjs from 'dayjs'
-import { Diamond } from 'phosphor-react'
+
 
 export async function appRoutes(app : FastifyInstance) {
     const createHabitBody  = z.object({ 
@@ -95,7 +95,11 @@ export async function appRoutes(app : FastifyInstance) {
         const completedHabits = day?.dayHabits.map(dayHabit => { 
 
             return dayHabit.habit_id
-        })
+        }) ?? []
+
+
+        console.log(completedHabits)
+
 
         return { 
             possibleHabits, 
