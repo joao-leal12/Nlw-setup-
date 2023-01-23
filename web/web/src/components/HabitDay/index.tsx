@@ -1,14 +1,23 @@
 import * as Popover from '@radix-ui/react-popover';
 import { ProgressBar } from '../ProgressBar';
 import clsx from 'clsx' 
-interface IHabitDayProgress { 
-  completed: number; 
-  amount: number 
-}
-export const HabitDay = ({completed, amount} : IHabitDayProgress) => {
+import dayjs from 'dayjs'
 
-  const completedPercentage = Math.round((completed / amount ) * 100 )
-  console.log(completedPercentage)
+import { CheckBox } from '../CheckBox';
+import { HabitsList } from '../HabitsList';
+interface IHabitDayProgress { 
+  completed?: number; 
+  amount?: number 
+  date: Date
+
+}
+export const HabitDay = ({completed = 0, amount= 0, date } : IHabitDayProgress) => {
+
+  const completedPercentage = amount > 0 ? Math.round((completed / amount ) * 100 ) : 0
+
+  const dayAndMonth = dayjs(date).format('DD/MM') 
+  const dayOfWeek = dayjs(date).format('dddd')
+
   return (
     <Popover.Root>
       <Popover.Trigger className={clsx("w-10 h-10  border-2 rounded-lg", {
@@ -23,10 +32,10 @@ export const HabitDay = ({completed, amount} : IHabitDayProgress) => {
 
       <Popover.Portal>
         <Popover.Content className="min-w-[320px] p-6 rounded-2xl bg-zinc-900 flex flex-col">
-            <span className="font-semibold text-zinc-400">Terça-feira</span>
-            <span className="mt-1 font-extrabold leading-tight text-3xl">17/01</span>  
-
+          <span className="font-semibold text-zinc-400">{dayOfWeek}</span>
+            <span className="mt-1 font-extrabold leading-tight text-3xl">{dayAndMonth}</span>  
             <ProgressBar progress={completedPercentage}/>
+            <HabitsList date={date}/>
           <Popover.Arrow height="12" width="20" className="fill-zinc-900"/>        
         </Popover.Content>         
       </Popover.Portal>

@@ -1,5 +1,5 @@
 import './styles/global.css'
-
+import './lib/dayjs'
 import { Header } from './components/header';
 import { SummaryTable } from './components/SummaryTable';
 export const App = () => {
