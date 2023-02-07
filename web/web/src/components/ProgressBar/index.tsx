@@ -4,7 +4,7 @@ interface IProgressBarProps {
     
 }
 
-export const ProgressBar = ({progress} : IProgressBarProps) => {
+export const ProgressBar = ({progress = 0 } : IProgressBarProps) => {
   return (
     <div className="h-3 rounded-xl bg-zinc-700 w-full mt-4">
         <div

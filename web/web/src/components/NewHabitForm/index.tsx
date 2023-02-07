@@ -34,7 +34,7 @@ export const NewHabitForm = () => {
   }
 
   return (
-    <form className="w-full flex flex-col mt-6" onSubmit={createNewHabit}>
+    <form className="w-full flex flex-col mt-6" onSubmit={createNewHabit} data-testid="habitForm">
         <label htmlFor="title" className="font-semibold leading-tight">
             Qual seu comprometimento? 
         </label>
